@@ -1,14 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const post = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { ingredients, cookTime } = req.body as {
+  const { ingredients } = req.body as {
     ingredients: string[];
-    cookTime: number;
   };
 
-  const prompt = `I have these ingredients: ${ingredients.join(
-    ", "
-  )}. Suggest 3 different recipes I can cook in under ${cookTime} minutes. The response should be 3 paragraphs. Don't include ingredient lists etc. in the response, and no decorative text like "Here's a recipe for you" or "Another recipe you'd enjoy...".`;
+  const prompt = `I have these ingredients: ${ingredients}. I would like 1 vegan cooking recipe using all the ingredients, divide them by the word 'recipe'. Try to make these original and edgy.`;
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -17,7 +14,7 @@ const post = async (req: NextApiRequest, res: NextApiResponse) => {
       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
     },
     body: JSON.stringify({
-      model: "gpt-3.5-turbo",
+      model: "ft:gpt-3.5-turbo-1106:personal::8UDQWx8e",
       messages: [{ content: prompt, role: "user" }],
     }),
   });
@@ -29,7 +26,7 @@ const post = async (req: NextApiRequest, res: NextApiResponse) => {
     .filter((line: string | any[]) => line.length > 0);
 
   res.status(200).json({
-    recipes: [recipes[0], recipes[1], recipes[2]],
+    recipes: recipes,
   });
 };
 
