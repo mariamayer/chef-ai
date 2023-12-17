@@ -59,8 +59,8 @@ export default function Home() {
             <main
                 className={`${PPEditorialNew.className} min-h-screen p-10 bg-black text-white`}
             >
-                <div className="text-7xl text-center">🌱</div>
-                <h1 className={`${lack.className} text-7xl text-center`}>
+                <div className="text-5xl md:text-7xl text-center">🌱</div>
+                <h1 className={`${lack.className} text-5xl md:text-7xl text-center`}>
                     Planta
                     <span className={`${Tickerbit.className} text-primary-100`}>
                         bot
