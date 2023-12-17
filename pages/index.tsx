@@ -103,7 +103,7 @@ export default function Home() {
                 <div className="recipe text-2xl">
                     {recipe &&
                         recipe.map((recipe, index) => (
-							index == 0 ? <div className="recipe-head"><h2 className={`${lack.className} recipe-title`}>{recipe}</h2></div> : <p className="recipe-text">{recipe}</p>
+							index == 0 ? <div key={index} className="recipe-head"><h2 className={`${lack.className} recipe-title`}>{recipe}</h2></div> : <p key={index} className="recipe-text">{recipe}</p>
                         ))}
                 </div>
             </main>
